@@ -1,6 +1,6 @@
 # Intro
 I need to get qtbase and qtmultimeida cross compiling to mingw32 for my job. I
-want to upstream these changes but sometimes review process in nixpkgs is taking
+want to upstream these changes but sometimes the review process in nixpkgs is taking
 longer than I have time for. This repo exists so I can iterate quickly on
 getting cross compilation working for nixpkgs and so other memembers of the
 community can leverage my work and hopefully help me get a few more packages
