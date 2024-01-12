@@ -13,11 +13,18 @@ nix build '.#pkgs.pkgsCross.mingw32.qtapp-example'
 nix build '.#pkgs.pkgsCross.mingw32.qtmultimeida'
 ```
 
-# Status
+## Status
 - qtbase: Working within overlay. Not fully ported to nixpkgs
 - qtapp-example: Working within overlay. May never be ported to nixpkgs
 - qtmultimeida: Not working within overlay. In progress.
 
-# Issue tracking
+## Issue tracking
 - https://github.com/NixOS/nixpkgs/issues/274274
 - https://github.com/NixOS/nixpkgs/issues/272538
+
+## Recommneded process to upstream to nixpkgs 
+1. Clone nixpkgs master branch
+2. Try and build qtbase or qtmultimeida within nixpkgs
+3. You should get a build error for one of the packages. Use this as the
+   starting package to port changes over. Once things are compiling, open a PR
+   for that individual package.
