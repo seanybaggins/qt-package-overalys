@@ -28,13 +28,9 @@ rec {
       VideoDecodeAcceleration VideoToolbox;
     withVdpau = false;
   };
-  harfbuzz = final.callPackage ./pkgs/harfbuzz {
-    inherit (prev.darwin.apple_sdk.frameworks) ApplicationServices CoreText;
-  };
   libtool = final.callPackage ./pkgs/libtool/libtool2.nix { };
   readline = final.callPackage ./pkgs/readline/8.2.nix { };
   sqlcipher = final.callPackage ./pkgs/sqlcipher { };
-  unbound = final.callPackage ./pkgs/unbound { };
   xmlsec = final.callPackage ./pkgs/xmlsec { };
   vulkan-loader = final.callPackage ./pkgs/vulkan-loader {
     inherit (prev.darwin) moltenvk;
