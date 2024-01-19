@@ -15,7 +15,7 @@ qtModule rec {
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ ];
   configurePhase = ''
-    cmake --install ./src/plugins/multimedia/windows ${lib.concatStringsSep " " cmakeFlags}
+    cmake --install ./src/plugins/multimedia/windows 
   '';
 
   cmakeFlags = [ ] ++ lib.optionals isCrossBuild [
