@@ -72,6 +72,8 @@ stdenv.mkDerivation rec {
     substituteInPlace cmake/Version.cmake \
       --replace "unknown" "${version}" \
       --replace "0.0" "${version}"
+
+    echo 'set(X265_LATEST_TAG "${version}")' >> ./cmake/Version.cmake
   '';
 
   nativeBuildInputs = [ cmake nasm ] ++ lib.optionals (numaSupport) [ numactl ];
