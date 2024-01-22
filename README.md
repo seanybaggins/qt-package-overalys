@@ -16,7 +16,7 @@ nix build '.#pkgs.pkgsCross.mingw32.qtmultimeida'
 ## Status
 - qtbase: Working within overlay. Not fully ported to nixpkgs
 - qtapp-example: Working within overlay. May never be ported to nixpkgs
-- qtmultimeida: Not working within overlay. In progress.
+- qtmultimeida: Working within overlay. Not fully ported to nixpkgs
 
 ## Issue tracking
 - https://github.com/NixOS/nixpkgs/issues/274274
