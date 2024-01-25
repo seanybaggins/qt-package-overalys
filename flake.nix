@@ -18,6 +18,17 @@
       in
       {
         packages.pkgs = pkgs;
+
+        #devShell = pkgs.mkShell {
+        #  packages = with pkgs; [
+        #    qt6.full
+        #    qtcreator
+        #    gnumake
+        #    gcc
+        #    gdb
+        #    cmake
+        #  ];
+        #};
       }
     );
 }

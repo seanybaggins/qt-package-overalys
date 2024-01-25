@@ -33,11 +33,6 @@ stdenv.mkDerivation (args // {
 
   dontWrapQtApps = args.dontWrapQtApps or true;
 
-  #cmakeFlags = (args.cmakeFlags or cmakeFlags) ++ lib.optionals isCrossBuild [
-  #  "-DQT_HOST_PATH=${pkgsBuildBuild.qt6.qtbase}"
-  #  #"-DQt6HostInfo_DIR=${pkgsBuildBuild.qt6.qtbase}/lib/cmake/Qt6HostInfo"
-  #];
-
   meta = with lib; {
     homepage = "https://www.qt.io/";
     description = "A cross-platform application framework for C++";

@@ -15,6 +15,7 @@ qtModule {
   '';
   nativeBuildInputs = [ qttools ];
   propagatedBuildInputs = [ qtdeclarative ];
+  qtInputs = [ ];
   cmakeFlags = [
     "-DCMAKE_MESSAGE_LOG_LEVEL=STATUS"
   ];

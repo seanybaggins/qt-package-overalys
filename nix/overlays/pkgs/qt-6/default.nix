@@ -54,34 +54,36 @@ let
       };
       env = callPackage ./qt-env.nix { };
       full = env "qt-full-${qtbase.version}" ([
+        qtbase
+        qtdeclarative
+        qtlanguageserver
+        qtmultimedia
+        qtshadertools
+        qtsvg
+      ] ++ lib.optionals (!stdenv.hostPlatform.isMinGW) [
         qt3d
         qt5compat
         qtcharts
         qtconnectivity
         qtdatavis3d
-        qtdeclarative
         qtdoc
         qtgrpc
         qthttpserver
         qtimageformats
-        qtlanguageserver
         qtlocation
         qtlottie
-        qtmultimedia
         qtmqtt
         qtnetworkauth
         qtpositioning
         qtsensors
         qtserialbus
         qtserialport
-        qtshadertools
         qtspeech
         qtquick3d
         qtquick3dphysics
         qtquickeffectmaker
         qtquicktimeline
         qtremoteobjects
-        qtsvg
         qtscxml
         qttools
         qttranslations
@@ -90,7 +92,10 @@ let
         qtwebengine
         qtwebsockets
         qtwebview
-      ] ++ lib.optionals (!stdenv.isDarwin) [ qtwayland libglvnd ]);
+      ] ++ lib.optionals (!stdenv.isDarwin && !stdenv.hostPlatform.isMinGW) [
+        qtwayland
+        libglvnd
+      ]);
 
       qt3d = callPackage ./modules/qt3d.nix { };
       qt5compat = callPackage ./modules/qt5compat.nix { };
@@ -112,8 +117,6 @@ let
         inherit (gst_all_1) gstreamer gst-plugins-base gst-plugins-good gst-libav gst-vaapi;
         inherit (darwin.apple_sdk_11_0.frameworks) VideoToolbox;
       };
-      qtmultimediawmf = callPackage ./modules/qtmultimediawmf.nix { };
-      qtmultimediaffmpeg = callPackage ./modules/qtmultimediaffmpeg.nix { };
       qtmqtt = callPackage ./modules/qtmqtt.nix { };
       qtnetworkauth = callPackage ./modules/qtnetworkauth.nix { };
       qtpositioning = callPackage ./modules/qtpositioning.nix { };

@@ -139,22 +139,6 @@
       name = "qtmultimedia-everywhere-src-6.5.1.tar.xz";
     };
   };
-  qtmultimediawmf = {
-    version = "6.5.1";
-    src = fetchurl {
-      url = "${mirror}/official_releases/qt/6.5/6.5.1/submodules/qtmultimedia-everywhere-src-6.5.1.tar.xz";
-      sha256 = "1k71chjdh66yv13li38ig507wpsr7cn87nqkvcfxmkf8w5hca7qb";
-      name = "qtmultimedia-everywhere-src-6.5.1.tar.xz";
-    };
-  };
-  qtmultimediaffmpeg = {
-    version = "6.5.1";
-    src = fetchurl {
-      url = "${mirror}/official_releases/qt/6.5/6.5.1/submodules/qtmultimedia-everywhere-src-6.5.1.tar.xz";
-      sha256 = "1k71chjdh66yv13li38ig507wpsr7cn87nqkvcfxmkf8w5hca7qb";
-      name = "qtmultimedia-everywhere-src-6.5.1.tar.xz";
-    };
-  };
   qtnetworkauth = {
     version = "6.5.1";
     src = fetchurl {
