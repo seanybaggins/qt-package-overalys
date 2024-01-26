@@ -10,7 +10,7 @@
 }:
 
 let
-  installerScriptBuilderOutput = "Z:\\home\\sean\\lightdeck\\releases\\qtapp-example\\Output";
+  installerScriptBuilderOutput = "Z:\\home\\youruser\\desired\\path";
 in
 stdenv.mkDerivation
 rec {
