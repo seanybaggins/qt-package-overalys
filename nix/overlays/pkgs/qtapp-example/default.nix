@@ -3,6 +3,10 @@
 , qt6
 , cmake
 , buildPackages
+, ffmpeg
+, gnutls
+, srt
+, libffi
 }:
 
 let
@@ -26,13 +30,17 @@ rec {
   ];
 
   cmakeFlags = [
-    "-DCMAKE_BUILD_TYPE=Debug"
+    "-DCMAKE_BUILD_TYPE=Release"
   ];
 
   postInstall = ''
-    # Copy DLL files from the qtbase package
+    # Copy DLL for application
     cp -r ${qt6.qtbase}/lib/qt-6/plugins/* $out/bin
     cp -r ${qt6.qtmultimedia}/lib/qt-6/plugins/* $out/bin
+    cp -r ${ffmpeg}/bin/* $out/bin
+    cp -r ${gnutls}/bin/* $out/bin
+    cp -r --remove-destination ${srt}/bin/* $out/bin
+    cp -r ${libffi}/bin/* $out/bin
 
     cat > $out/${pname}-installer-builder.iss <<'EOF'
       #define MyAppName "${pname}"
@@ -70,7 +78,7 @@ rec {
       Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
       [Files]
-      Source: "Z:$out\bin\*"; DestDir: "{app}"; Flags: ignoreversion
+      Source: "Z:$out\bin\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
       ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
       [Icons]
@@ -88,6 +96,7 @@ rec {
   '';
 
   postFixup = ''
+    echo "Converting Sym links to the actual file"
     for link in $(${buildPackages.findutils}/bin/find $out/bin -type l); do
       target="$(readlink -f "$link")"
       if [ -f "$target" ]; then
