@@ -12,4 +12,6 @@ qtModule {
   cmakeFlags = [ ] ++ lib.optionals isCrossBuild [
     "-DQt6ShaderToolsTools_DIR=${pkgsBuildBuild.qt6.qtshadertools}/lib/cmake/Qt6ShaderToolsTools"
   ];
+  patches = ../patches/qtshadertools-missing-includes.patch;
+
 }

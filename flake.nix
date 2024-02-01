@@ -2,7 +2,7 @@
   description = "A flake for lightdeck studio development and build environment";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
+    nixpkgs.url = "github:seanybaggins/nixpkgs";
     utils.url = "github:numtide/flake-utils";
   };
 
