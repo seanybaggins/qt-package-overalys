@@ -5,21 +5,21 @@ final: prev:
 rec {
   libjpeg_turbo = final.callPackage ./pkgs/libjpeg-turbo { };
   libjpeg = libjpeg_turbo;
-  dav1d = final.callPackage ./pkgs/dav1d { };
+  #dav1d = final.callPackage ./pkgs/dav1d { };
   soxr = final.callPackage ./pkgs/soxr { };
   speexdsp = final.callPackage ./pkgs/speexdsp { };
   speex = final.callPackage ./pkgs/speex { };
   libtheora = final.callPackage ./pkgs/libtheora { };
-  x264 = final.callPackage ./pkgs/x264 { };
+  #x264 = final.callPackage ./pkgs/x264 { };
   x265 = final.callPackage ./pkgs/x265 { };
   xvidcore = final.callPackage ./pkgs/xvidcore { };
   SDL2 = final.callPackage ./pkgs/SDL2 {
     inherit (prev.darwin.apple_sdk.frameworks) AudioUnit Cocoa CoreAudio CoreServices ForceFeedback OpenGL;
   };
   libwinpthreads = final.callPackage ./pkgs/libwinpthreads { };
-  srt = final.callPackage ./pkgs/srt { };
-  freetype = final.callPackage ./pkgs/freetype { };
-  lzip = final.callPackage ./pkgs/lzip { };
+  #srt = final.callPackage ./pkgs/srt { };
+  #freetype = final.callPackage ./pkgs/freetype { };
+  #lzip = final.callPackage ./pkgs/lzip { };
   libopus = final.callPackage ./pkgs/libopus { };
   ffmpeg = final.callPackage ./pkgs/ffmpeg/5.nix {
     inherit (prev.darwin.apple_sdk.frameworks)
@@ -33,8 +33,8 @@ rec {
       VideoDecodeAcceleration VideoToolbox;
     withVdpau = false;
   };
-  unbound = final.callPackage ./pkgs/unbound { };
-  p11-kit = final.callPackage ./pkgs/p11-kit { };
+  #unbound = final.callPackage ./pkgs/unbound { };
+  #p11-kit = final.callPackage ./pkgs/p11-kit { };
   gnutls = final.callPackage ./pkgs/gnutls {
     inherit (prev.darwin.apple_sdk.frameworks) Security;
     util-linux = prev.util-linuxMinimal; # break the cyclic dependency
