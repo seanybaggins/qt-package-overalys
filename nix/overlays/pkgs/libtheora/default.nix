@@ -23,12 +23,9 @@ stdenv.mkDerivation rec {
       url = "https://github.com/xiph/theora/commit/28cc6dbd9b2a141df94f60993256a5fca368fa54.diff";
       sha256 = "16jqrq4h1b3krj609vbpzd5845cvkbh3mwmjrcdg35m490p19x9k";
     })
+  ] ++ lib.optionals stdenv.hostPlatform.isMinGW [
+    ./mingw-remove-export.patch
   ];
-
-  preAutoreconf = lib.optionalString (stdenv.hostPlatform.isMinGW) ''
-    sed -i "s,EXPORTS,," "win32/xmingw32/libtheoradec-all.def"
-    sed -i "s,EXPORTS,," "win32/xmingw32/libtheoraenc-all.def"
-  '';
 
   configureFlags = [
     "--disable-examples"
