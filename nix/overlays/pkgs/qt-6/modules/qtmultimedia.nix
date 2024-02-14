@@ -26,7 +26,7 @@ qtModule {
   pname = "qtmultimedia";
   qtInputs = [ qtbase qtdeclarative qtsvg qtshadertools ];
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = lib.optionals stdenv.isLinux [ libpulseaudio elfutils alsa-lib wayland ];
+  buildInputs = lib.optionals stdenv.hostPlatform.isLinux [ libpulseaudio elfutils alsa-lib wayland ];
 
   propagatedBuildInputs =
     lib.optionals stdenv.isLinux [ gstreamer gst-plugins-base gst-plugins-good gst-libav gst-vaapi ]

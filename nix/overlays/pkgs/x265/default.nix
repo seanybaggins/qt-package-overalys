@@ -133,11 +133,13 @@ stdenv.mkDerivation rec {
     runHook postCheck
   '';
 
-  postInstall = lib.optionalString stdenv.hostPlatform.isMinGW ''
+  postInstall = ''
+    rm -f ${placeholder "out"}/lib/*.a
+  ''
+  # For mingw, libs are located in $out/bin not $out/lib
+  + lib.optionalString stdenv.hostPlatform.isMinGW ''
     substituteInPlace $out/lib/pkgconfig/x265.pc \
       --replace "libdir=\''${exec_prefix}/lib" "libdir=\''${exec_prefix}/bin"
-  '' + ''
-    rm -f ${placeholder "out"}/lib/*.a
   '';
 
   meta = with lib; {
