@@ -1,0 +1,13 @@
+diff --git a/main.cc b/main.cc
+index 1a905a8..e87202d 100644
+--- a/main.cc
++++ b/main.cc
+@@ -456,7 +456,7 @@ bool make_dirs( const std::string & name )
+       struct stat st;
+       if( stat( partial.c_str(), &st ) == 0 )
+         { if( !S_ISDIR( st.st_mode ) ) { errno = ENOTDIR; return false; } }
+-      else if( mkdir( partial.c_str(), mode ) != 0 && errno != EEXIST )
++      else if( mkdir( partial.c_str() ) != 0 && errno != EEXIST )
+         return false;		// if EEXIST, another process created the dir
+       }
+     }

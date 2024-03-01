@@ -101,7 +101,7 @@ stdenv.mkDerivation rec {
       (lib.withFeature withP11-kit "p11-kit")
       (lib.enableFeature cxxBindings "cxx")
     ] ++ lib.optionals (stdenv.hostPlatform.isMinGW) [
-      "--disable-non-suiteb-curves"
+      #"--disable-non-suiteb-curves"
       "--disable-doc"
     ];
 
