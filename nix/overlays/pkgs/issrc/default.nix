@@ -1,7 +1,7 @@
 { stdenv
 , wine
 , fetchgit
-, pkgsBuildHost
+, pkgsBuildBuild
 }:
 
 stdenv.mkDerivation {
@@ -12,6 +12,6 @@ stdenv.mkDerivation {
     hash = "sha256-39msOpoa9vDqblE/ygR2wDF5HzJo7BAjpw6AtZ4YbXc=";
   };
 
-  buildPhase = "${pkgsBuildHost.wine} build.bat";
+  buildPhase = "${pkgsBuildBuild.wine} build.bat";
 
 }
