@@ -7,12 +7,12 @@ rec {
   #libjpeg = libjpeg_turbo;
   #soxr = final.callPackage ./pkgs/soxr { }; # leaf. Merged.
   #speexdsp = final.callPackage ./pkgs/speexdsp { }; # leaf. PR in progress
-  issrc = final.callPackage ./pkgs/issrc { };
+  innosetup = final.callPackage ./pkgs/innosetup { };
   #lzip = final.callPackage ./pkgs/lzip { };
   #speex = final.callPackage ./pkgs/speex { }; # dependant speexdsp. Waiting for speexdsp
   #libtheora = final.callPackage ./pkgs/libtheora { }; # leaf. PR in progress
   #x265 = final.callPackage ./pkgs/x265 { }; # leaf. PR in progress
-  xvidcore = final.callPackage ./pkgs/xvidcore { };
+  #xvidcore = final.callPackage ./pkgs/xvidcore { };
   #SDL2 = final.callPackage ./pkgs/SDL2 {
   #  inherit (prev.darwin.apple_sdk.frameworks) AudioUnit Cocoa CoreAudio CoreServices ForceFeedback OpenGL;
   #};

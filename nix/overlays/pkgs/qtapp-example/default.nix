@@ -7,6 +7,9 @@
 , gnutls
 , srt
 , libffi
+, wine
+, pkgsBuildBuild
+, pkgsBuildHost
 }:
 
 let
@@ -22,6 +25,11 @@ rec {
   nativeBuildInputs = [
     cmake
     buildPackages.findutils
+    buildPackages.innosetup
+  ];
+
+  depsBuildBuild = [
+    buildPackages.wine64
   ];
 
   propagatedBuildInputs = [
@@ -103,6 +111,8 @@ rec {
         cp --remove-destination "$target" "$link"
       fi
     done
+
+    wine ISCC.exe $out/${pname}-installer-builder.iss
   '';
 
   dontWrapQtApps = true;
