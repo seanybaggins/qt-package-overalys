@@ -7,9 +7,8 @@
 , gnutls
 , srt
 , libffi
-, wine
 , pkgsBuildBuild
-, pkgsBuildHost
+, windows
 }:
 
 let
@@ -25,12 +24,11 @@ rec {
   nativeBuildInputs = [
     cmake
     buildPackages.findutils
-    buildPackages.innosetup
+    pkgsBuildBuild.wineWow64Packages.stable
   ];
 
-  depsBuildBuild = [
-    buildPackages.wine64
-  ];
+  #depsBuildBuild = [
+  #];
 
   propagatedBuildInputs = [
     qt6.qtbase
@@ -45,10 +43,17 @@ rec {
     # Copy DLL for application
     cp -r ${qt6.qtbase}/lib/qt-6/plugins/* $out/bin
     cp -r ${qt6.qtmultimedia}/lib/qt-6/plugins/* $out/bin
+    cp -r ${qt6.qtsvg}/bin/* $out/bin
     cp -r ${ffmpeg}/bin/* $out/bin
     cp -r ${gnutls}/bin/* $out/bin
     cp -r --remove-destination ${srt}/bin/* $out/bin
     cp -r ${libffi}/bin/* $out/bin
+    
+    # Solves PermissionError: [Errno 13] Permission denied: '/homeless-shelter/.wine'
+    export HOME=$(mktemp -d)
+
+    mkdir -p $out/installer
+    winInstallerOutPath=$(wine winepath -w "$out/installer")
 
     cat > $out/${pname}-installer-builder.iss <<'EOF'
       #define MyAppName "${pname}"
@@ -74,7 +79,7 @@ rec {
       ; Uncomment the following line to run in non administrative install mode (install for current user only.)
       ;PrivilegesRequired=lowest
       OutputBaseFilename={#MyAppName}-installer.exe
-      OutputDir=${installerScriptBuilderOutput}
+      OutputDir=$winInstallerOutPath
       Compression=lzma
       SolidCompression=yes
       WizardStyle=modern
@@ -100,7 +105,8 @@ rec {
     substituteInPlace $out/${pname}-installer-builder.iss \
       --replace "\$out\bin" "$out\bin" \
       --replace "/" "\\" \
-      --replace "https:\\\\www.example.com\\" "https://www.example.com/"
+      --replace "https:\\\\www.example.com\\" "https://www.example.com/" \
+      --replace '$winInstallerOutPath' ''$winInstallerOutPath
   '';
 
   postFixup = ''
@@ -112,7 +118,8 @@ rec {
       fi
     done
 
-    wine ISCC.exe $out/${pname}-installer-builder.iss
+    winPathInstallerBuilder=$(wine winepath -w "$out/${pname}-installer-builder.iss")
+    wine ${buildPackages.innosetup}/ISCC.exe $winPathInstallerBuilder
   '';
 
   dontWrapQtApps = true;

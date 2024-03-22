@@ -18,11 +18,11 @@ rec {
   #};
   #libwinpthreads = final.callPackage ./pkgs/libwinpthreads { };
   #libopus = final.callPackage ./pkgs/libopus { };
-  ffmpeg = final.callPackage ./pkgs/ffmpeg/5.nix {
-    inherit (prev.darwin.apple_sdk.frameworks)
-      Cocoa CoreServices CoreAudio CoreMedia AVFoundation MediaToolbox
-      VideoDecodeAcceleration VideoToolbox;
-  };
+  #ffmpeg = final.callPackage ./pkgs/ffmpeg/5.nix {
+  #  inherit (prev.darwin.apple_sdk.frameworks)
+  #    Cocoa CoreServices CoreAudio CoreMedia AVFoundation MediaToolbox
+  #    VideoDecodeAcceleration VideoToolbox;
+  #};
   #ffmpeg_small = final.callPackage ./pkgs/ffmpeg/5.nix {
   #  ffmpegVariant = "small";
   #  inherit (prev.darwin.apple_sdk.frameworks)
