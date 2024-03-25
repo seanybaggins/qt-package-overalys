@@ -8,12 +8,10 @@
 , srt
 , libffi
 , pkgsBuildBuild
-, windows
+, iscc
+, lua
 }:
 
-let
-  installerScriptBuilderOutput = "Z:\\home\\youruser\\desired\\path";
-in
 stdenv.mkDerivation
 rec {
   pname = "qtapp-example";
@@ -25,10 +23,12 @@ rec {
     cmake
     buildPackages.findutils
     pkgsBuildBuild.wineWow64Packages.stable
+    lua
   ];
 
-  #depsBuildBuild = [
-  #];
+  depsBuildBuild = [
+    iscc
+  ];
 
   propagatedBuildInputs = [
     qt6.qtbase
@@ -37,6 +37,9 @@ rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
+    #"-DCMAKE_CXX_FLAGS=-static-libstdc++"
+    #"-DCMAKE_CXX_FLAGS=-static-libgcc"
+    #"-DCMAKE_CXX_FLAGS=-optl-static"
   ];
 
   postInstall = ''
@@ -48,7 +51,7 @@ rec {
     cp -r ${gnutls}/bin/* $out/bin
     cp -r --remove-destination ${srt}/bin/* $out/bin
     cp -r ${libffi}/bin/* $out/bin
-    
+
     # Solves PermissionError: [Errno 13] Permission denied: '/homeless-shelter/.wine'
     export HOME=$(mktemp -d)
 
@@ -78,7 +81,7 @@ rec {
       DisableProgramGroupPage=yes
       ; Uncomment the following line to run in non administrative install mode (install for current user only.)
       ;PrivilegesRequired=lowest
-      OutputBaseFilename={#MyAppName}-installer.exe
+      OutputBaseFilename={#MyAppName}-installer
       OutputDir=$winInstallerOutPath
       Compression=lzma
       SolidCompression=yes
@@ -118,8 +121,7 @@ rec {
       fi
     done
 
-    winPathInstallerBuilder=$(wine winepath -w "$out/${pname}-installer-builder.iss")
-    wine ${buildPackages.innosetup}/ISCC.exe $winPathInstallerBuilder
+    iscc $out/${pname}-installer-builder.iss
   '';
 
   dontWrapQtApps = true;

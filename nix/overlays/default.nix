@@ -7,7 +7,7 @@ rec {
   #libjpeg = libjpeg_turbo;
   #soxr = final.callPackage ./pkgs/soxr { }; # leaf. Merged.
   #speexdsp = final.callPackage ./pkgs/speexdsp { }; # leaf. PR in progress
-  innosetup = final.callPackage ./pkgs/innosetup { };
+  #innosetup = final.callPackage ./pkgs/innosetup { };
   #lzip = final.callPackage ./pkgs/lzip { };
   #speex = final.callPackage ./pkgs/speex { }; # dependant speexdsp. Waiting for speexdsp
   #libtheora = final.callPackage ./pkgs/libtheora { }; # leaf. PR in progress
@@ -43,6 +43,7 @@ rec {
   #  inherit (prev.darwin) moltenvk;
   #};
   #vulkan-headers = final.callPackage ./pkgs/vulkan-headers { };
+  iscc = final.callPackage ./pkgs/iscc {};
   qt6 = final.callPackage ./pkgs/qt-6 { };
   qtapp-example = final.callPackage ./pkgs/qtapp-example { };
   #lua = (final.callPackage ./pkgs/lua-5 { }).lua5_2_compat;
