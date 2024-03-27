@@ -7,25 +7,18 @@ community can leverage my work and hopefully help me get a few more packages
 cross compiling :)
 
 ## Building
+Make sure you have you have the nix package manager installed with flakes
+enabled. You can install the nix pakcage manager with flakes enabled on
+non-nixos systems by running
 ```
-nix build '.#pkgs.pkgsCross.mingw32.qtbase'
-nix build '.#pkgs.pkgsCross.mingw32.qtmultimeida'
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
-
-For `qtapp-example`: 
-1. Navigate to `nix/overlays/pkgs/qtapp-example/default.nix`
-and change the `installerScriptBuilderOutput` varable to a path where you want
-your final windows installer to be placed.
-2. Run `nix build '.#pkgs.pkgsCross.mingw32.qtapp-example'`
-3. Install [bottles](https://usebottles.com/)
-4. Create a new bottle and install [inno setup](https://jrsoftware.org/isdl.php#stable) within the bottle 
-5. Run inno setup
-6. Goto `file->open` and select the `qtapp-example-installer-builder.iss` that
-   was built from running `nix build '.#pkgs.pkgsCross.mingw32.qtapp-example'`
-7. Press `build->compile`
-8. Navigate to the directory specified in `installerScriptBuilderOutput`. You
-   should find the installer named `qtapp-example-installer.exe.exe` 
-9. Run the installer in your windows environment
+You can then build the example application by running 
+```
+nix build 'github:seanybaggins/qt-package-overalys#pkgs.pkgsCross.mingw32.qtapp-example'
+```
+See the result/installer directory for the windows installer to run wihtin your
+windows environment.
 
 ## Expected behavior of qtapp-example
 On launch before button is pressed
